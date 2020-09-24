@@ -1,0 +1,76 @@
+<html>
+    <title>Khalti Web Integration | Test Mode</title>
+<head>
+    <script src="https://unpkg.com/khalti-checkout-web@latest/dist/khalti-checkout.iffe.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+ <body onload="welcome()"> <center>
+     <h1>Khalti Web Integration | Test Mode</h1>
+    <!-- Place this where you need payment button -->
+    <button id="payment-button"><p id="button">Loading..</p></button>
+    <script>
+        var btn = document.getElementById("payment-button");
+        function welcome(){
+         document.getElementById("button").innerHTML = 'Pay with Khalti'; 
+        }
+    </script>
+    <!-- Place this where you need payment button -->
+    <!-- Paste this code anywhere in you body tag -->
+    <script>
+        var config = {
+            // replace the publicKey with yours
+            "publicKey": "test_public_key_",
+            "productIdentity": "1234567890",
+            "productName": "Dragon",
+            "productUrl": "http://gameofthrones.wikia.com/wiki/Dragons",
+            "paymentPreference": [
+                "MOBILE_BANKING",
+                "KHALTI",
+                "EBANKING",
+                "CONNECT_IPS",
+                "SCT",
+                ],
+            "eventHandler": {
+                onSuccess (payload) {
+                     document.getElementById("result").innerHTML = 'Client Side Verification Sucess, waiting for Server verification response'; 
+                      document.getElementById("button").innerHTML = 'Processing..'; 
+                      btn.disabled = true;
+                     
+                    // hit merchant api for initiating verfication
+                   console.log(payload);
+                  $.post("verify.php", payload, function (resp) {
+                      if (resp == 200) {
+                      document.getElementById("result").innerHTML = 'Server Verification Response Received <br>Payment Succeed !!'; 
+                      document.getElementById("button").innerHTML = 'Sucess'; 
+                      }else{
+                            document.getElementById("result").innerHTML = 'Server Verification Response Received <br>Payment Failed: '+resp+' ';
+                            document.getElementById("button").innerHTML = 'Try Again';
+                            btn.disabled = false;
+
+                      }
+    })
+                },
+                onError (error) {
+                      document.getElementById("result").innerHTML = 'Client Side Verification Error, Try again'; 
+                       btn.disabled = false;
+                },
+                onClose () {
+                   document.getElementById("result").innerHTML = 'Widget closed'; 
+                    btn.disabled = false;
+                }
+            }
+        };
+
+        var checkout = new KhaltiCheckout(config);
+        var btn = document.getElementById("payment-button");
+        btn.onclick = function () {
+            // minimum transaction amount must be 10, i.e 1000 in paisa.
+            checkout.show({amount: 1000});
+            document.getElementById("result").innerHTML = "Button Clicked";
+        }
+    </script>
+    <!-- Paste this code anywhere in you body tag -->
+    <br>
+    <p id="result">This is a Test Mode<br>No Transaction takes place<br>Just click pay button, select any option and submit random 10 digit phone number</p> 
+</body>
+</html>
