@@ -15,3 +15,4 @@ Create a merchant account from https://khalti.com/merchant/
 - Test Mode available
 - Proper Documentation
 - Best Customer Support
+- Its FREE!
