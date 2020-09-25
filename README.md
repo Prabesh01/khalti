@@ -18,4 +18,4 @@ Create a merchant account from https://khalti.com/merchant/
 - Integration is FREE!
 
 # Cons :( 
-- Costs around 20k + 3% service fee (However other payment gateways too costs almost same)
+- Costs around 20k once then 3% service fee on each withdraw (However other payment gateways too costs almost the same)
