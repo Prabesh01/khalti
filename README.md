@@ -12,7 +12,7 @@ Create a merchant account from https://khalti.com/merchant/
 
 # Why Khalti? Why not esewa?
 - esewa sucks
-- Test Mode available
+- Test Mode available with test APIs (Ofcourse, for free)
 - Proper Documentation
 - Best Customer Support
 - Integration is FREE!
