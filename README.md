@@ -1,4 +1,6 @@
-Khalti web integration example
+Khalti web integration example<br>
+
+_Disclaimer: I am not responsible for any of your loss caused while using these scripts due to any kind of bug or security flaws herein_
 
 
 # Reference: https://docs.khalti.com/
